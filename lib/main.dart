@@ -15,6 +15,7 @@ Future<void> main() async {
     statusBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
     systemNavigationBarColor: AppColors.darkestRed,
+    statusBarIconBrightness: Brightness.dark,
   ));
   runApp(const Sudatel());
 }
