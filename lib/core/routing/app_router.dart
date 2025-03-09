@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/core/routing/app_routes.dart';
+import '../../features/splash/presentation/views/splash_view/splash_view.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -6,6 +8,8 @@ class AppRouter {
     final args = settings.arguments;
 
     switch (settings.name) {
+      case AppRoutes.splash:
+        return transitionPage(const SplashView());
 
       default:
         return MaterialPageRoute(

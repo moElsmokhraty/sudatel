@@ -11,6 +11,11 @@ Future<void> main() async {
     ScreenUtil.ensureScreenSize(),
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
   ]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarColor: AppColors.darkestRed,
+  ));
   runApp(const Sudatel());
 }
 
@@ -29,6 +34,7 @@ class Sudatel extends StatelessWidget {
         title: 'Sudatel',
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenerateRoute,
+        initialRoute: AppRoutes.splash,
       ),
     );
   }
