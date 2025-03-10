@@ -35,7 +35,7 @@ class Sudatel extends StatelessWidget {
         title: 'Sudatel',
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.home,
       ),
     );
   }

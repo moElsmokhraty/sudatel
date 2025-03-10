@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/home/presentation/views/home_view/home_view.dart';
 import '/core/routing/app_routes.dart';
 import '../../features/auth/presentation/views/login_view/login_view.dart';
 import '../../features/splash/presentation/views/splash_view/splash_view.dart';
@@ -13,6 +14,8 @@ class AppRouter {
         return transitionPage(const SplashView());
       case AppRoutes.login:
         return transitionPage(const LoginView());
+      case AppRoutes.home:
+        return transitionPage(const HomeView());
 
       default:
         return MaterialPageRoute(

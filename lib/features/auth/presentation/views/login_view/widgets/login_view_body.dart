@@ -13,7 +13,7 @@ class LoginViewBody extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AppAssets.loginBg),
+          image: AssetImage(AppAssets.background),
           fit: BoxFit.cover,
         ),
       ),
