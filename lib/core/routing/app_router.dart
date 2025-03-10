@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sudatel/core/di/service_locator.dart';
+import '../../features/home/data/repos/auth_repo/auth_repo.dart';
+import '../../features/home/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../features/home/presentation/views/home_view/home_view.dart';
 import '/core/routing/app_routes.dart';
 import '../../features/auth/presentation/views/login_view/login_view.dart';
@@ -13,7 +17,10 @@ class AppRouter {
       case AppRoutes.splash:
         return transitionPage(const SplashView());
       case AppRoutes.login:
-        return transitionPage(const LoginView());
+        return transitionPage(BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(getIt.get<AuthRepo>()),
+          child: const LoginView(),
+        ));
       case AppRoutes.home:
         return transitionPage(const HomeView());
 

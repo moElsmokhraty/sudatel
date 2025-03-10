@@ -16,18 +16,12 @@ class _HomeNavBarState extends State<HomeNavBar> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {});
+    });
     widget.controller.addListener(() {
       setState(() {});
     });
-  }
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(() {
-      setState(() {});
-    });
-    widget.controller.dispose();
-    super.dispose();
   }
 
   @override

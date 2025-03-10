@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'spinkit.dart';
+import '../../../../../../core/widgets/spinkit.dart';
 import '../../../../../../core/styles/app_assets.dart';
 import '../../../../../../core/styles/app_colors.dart';
 

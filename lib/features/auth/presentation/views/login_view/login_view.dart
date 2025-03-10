@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'widgets/login_button.dart';
 import 'widgets/login_view_body.dart';
-import '../../../../../core/widgets/buttons/gradient_button.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -13,10 +13,7 @@ class LoginView extends StatelessWidget {
         child: LoginViewBody(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: GradientButton(
-        onPressed: () {},
-        text: 'Sign in',
-      ),
+      floatingActionButton: const LoginButton(),
     );
   }
 }

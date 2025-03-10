@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1049820558410",
+    "project_id": "sudatel-cdbad",
+    "storage_bucket": "sudatel-cdbad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049820558410:android:b15aaba1ee66784bfde2b3",
+        "android_client_info": {
+          "package_name": "com.example.sudatel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049820558410-q4rep4f9cnqh2dn0pe102hpdgmt72vrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sudatel",
+            "certificate_hash": "dba883facc3cc99911cf0a1364e8f20e303294bf"
+          }
+        },
+        {
+          "client_id": "1049820558410-f37pdvu4t7h56jnekjib7jgr6ogbtkb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZtehMHvw96yHoHwT--Xkogk8gvTDKXgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049820558410-f37pdvu4t7h56jnekjib7jgr6ogbtkb6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1049820558410-0ucj6hb4bkqpo4k26h2oei1jpl6s0g9j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sudatel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
