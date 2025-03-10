@@ -45,8 +45,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           const VerticalSpace(24),
           Expanded(
             child: Container(
-              width: 1.sw,
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+              padding: EdgeInsets.only(
+                right: 24.w,
+                left: 24.w,
+                top: 24.h,
+                bottom: 90.h,
+              ),
               decoration: BoxDecoration(
                 color: Color(0XFFF8F8F8),
                 borderRadius: BorderRadius.only(

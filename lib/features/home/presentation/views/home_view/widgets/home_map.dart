@@ -73,6 +73,9 @@ class HomeMapState extends State<HomeMap> with AutomaticKeepAliveClientMixin {
           : ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
               child: GoogleMap(
+                scrollGesturesEnabled: false,
+                zoomGesturesEnabled: false,
+                zoomControlsEnabled: false,
                 initialCameraPosition: CameraPosition(
                   target: _currentPosition!,
                   zoom: 15,

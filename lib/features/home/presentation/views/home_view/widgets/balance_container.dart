@@ -32,6 +32,7 @@ class BalanceContainer extends StatelessWidget {
           ),
         ],
       ),
+      margin: EdgeInsets.only(bottom: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       child: Column(
         mainAxisSize: MainAxisSize.min,
