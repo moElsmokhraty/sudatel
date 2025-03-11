@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../cubits/home_cubit/home_cubit.dart';
 import 'widgets/home_nav_bar.dart';
 import 'widgets/home_view_body.dart';
 
@@ -16,6 +18,8 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
+    context.read<HomeCubit>().getCheckInAndOutTimes();
+    context.read<HomeCubit>().didUserCheckInToday();
   }
 
   @override

@@ -51,16 +51,23 @@ class _AnnouncementsTabState extends State<AnnouncementsTab>
                   ),
                 );
               } else if (snapshot.hasData && snapshot.data != null) {
-                return ListView.separated(
-                  itemCount: snapshot.data!.length,
-                  padding: EdgeInsets.only(top: 24.h),
-                  separatorBuilder: (context, index) => Divider(
-                    color: Color(0XFFAAA9A9).withOpacity(0.16),
-                  ),
-                  itemBuilder: (context, index) => AnnouncementItem(
-                    title: snapshot.data![index].title,
-                    subtitle: snapshot.data![index].subtitle,
-                    date: snapshot.data![index].date,
+                return RefreshIndicator(
+                  color: AppColors.darkRed,
+                  onRefresh: () async {
+                    await getAnnouncements();
+                  },
+                  child: ListView.separated(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: snapshot.data!.length,
+                    padding: EdgeInsets.only(top: 24.h),
+                    separatorBuilder: (context, index) => Divider(
+                      color: Color(0XFFAAA9A9).withOpacity(0.16),
+                    ),
+                    itemBuilder: (context, index) => AnnouncementItem(
+                      title: snapshot.data![index].title,
+                      subtitle: snapshot.data![index].subtitle,
+                      date: snapshot.data![index].date,
+                    ),
                   ),
                 );
               } else if (snapshot.hasError) {

@@ -15,15 +15,11 @@ class LoginButton extends StatelessWidget {
       listener: (context, state) async {
         if (state is LoginFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
+            SnackBar(content: Text(state.message)),
           );
         } else if (state is LoginSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Welcome ${state.user?.email}'),
-            ),
+            SnackBar(content: Text('Welcome ${state.user?.email}')),
           );
           await context.pushNamedAndRemoveUntil(
             AppRoutes.home,

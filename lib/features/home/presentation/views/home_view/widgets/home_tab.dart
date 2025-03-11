@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/styles/app_colors.dart';
+import '../../../cubits/home_cubit/home_cubit.dart';
 import 'home_map.dart';
 import 'user_info.dart';
 import 'balance_container.dart';
@@ -12,47 +15,54 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const UserInfo(),
-          const VerticalSpace(24),
-          Container(
-            width: 1.sw,
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 16.h,
+    return RefreshIndicator(
+      color: AppColors.darkRed,
+      onRefresh: () async {
+        await context.read<HomeCubit>().getCheckInAndOutTimes();
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const UserInfo(),
+            const VerticalSpace(24),
+            Container(
+              width: 1.sw,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 16.h,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Column(
+                children: [
+                  const CheckInAndOutContainers(),
+                  const VerticalSpace(16),
+                  const HomeMap(),
+                  const VerticalSpace(16),
+                  const CheckInAndOutButton(),
+                ],
+              ),
             ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-            child: Column(
+            const VerticalSpace(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CheckInAndOutContainers(),
-                const VerticalSpace(16),
-                const HomeMap(),
-                const VerticalSpace(16),
-                const CheckInAndOutButton(),
+                BalanceContainer(
+                  title: 'Regular',
+                  balance: 11,
+                ),
+                BalanceContainer(
+                  title: 'Emergency',
+                  balance: 4,
+                ),
               ],
             ),
-          ),
-          const VerticalSpace(16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BalanceContainer(
-                title: 'Regular',
-                balance: 11,
-              ),
-              BalanceContainer(
-                title: 'Emergency',
-                balance: 4,
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

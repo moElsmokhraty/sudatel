@@ -59,6 +59,12 @@ class HomeRepoImpl implements HomeRepo {
     try {
       String today = DateTime.now().toIso8601String().split('T')[0];
 
+      bool didCheckOutToday = await didUserCheckOutToday();
+
+      if (didCheckOutToday) {
+        return Left(Failure('You already checked out today'));
+      }
+
       DocumentReference checkInRef = FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -123,5 +129,24 @@ class HomeRepoImpl implements HomeRepo {
     } catch (e) {
       return Left(Failure('An error occurred'));
     }
+  }
+
+  @override
+  Future<bool> didUserCheckOutToday() async {
+    String today = DateTime.now().toIso8601String().split('T')[0];
+
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('checkIns')
+        .doc(today)
+        .get();
+
+    if (snapshot.exists) {
+      Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+      return data != null && data.containsKey('checkOutTime');
+    }
+
+    return false;
   }
 }

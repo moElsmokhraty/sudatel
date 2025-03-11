@@ -10,4 +10,6 @@ abstract class HomeRepo {
   Future<Either<Failure, void>> checkOutUser();
 
   Future<Either<Failure, CheckInAndOutTimesModel>> getCheckInAndOutTimes();
+
+  Future<bool> didUserCheckOutToday();
 }

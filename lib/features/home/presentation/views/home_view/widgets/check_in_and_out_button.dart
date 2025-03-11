@@ -39,9 +39,29 @@ class _CheckInAndOutButtonState extends State<CheckInAndOutButton> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is CheckInUserSuccess || state is CheckOutUserSuccess) {
+          context.read<HomeCubit>().getCheckInAndOutTimes();
+        } else if (state is GetCheckInAndOutTimesSuccess) {
+          context.read<HomeCubit>().didUserCheckInToday();
+        }
+      },
+      buildWhen: (previous, current) {
+        return previous is DidCheckInLoading ||
+            current is DidCheckInSuccess ||
+            current is DidCheckInError ||
+            current is CheckInUserLoading ||
+            current is CheckOutUserLoading ||
+            current is CheckInUserSuccess ||
+            current is CheckOutUserSuccess ||
+            current is CheckInUserError ||
+            current is CheckOutUserError;
+      },
       builder: (context, state) {
-        if (state is DidCheckInLoading) {
+        if (state is DidCheckInLoading ||
+            state is CheckInUserLoading ||
+            state is CheckOutUserLoading) {
           return Center(
             child: SpinKitCircle(
               color: AppColors.darkRed,
@@ -60,8 +80,29 @@ class _CheckInAndOutButtonState extends State<CheckInAndOutButton> {
               width: 1.8,
             ),
           );
+        } else if (state is CheckOutUserError &&
+            state.errorMessage == 'You already checked out today') {
+          return CustomButton(
+            text: 'You already checked out today',
+            onPressed: () async {},
+            color: Colors.white,
+            borderSide: BorderSide(
+              color: AppColors.darkRed,
+              width: 1.8,
+            ),
+          );
         } else {
-          return SizedBox.shrink();
+          return CustomButton(
+            text: 'Check In',
+            onPressed: () async {
+              await checkInOrOut(isWithinBoundaries, true);
+            },
+            color: Colors.white,
+            borderSide: BorderSide(
+              color: AppColors.darkRed,
+              width: 1.8,
+            ),
+          );
         }
       },
     );
@@ -71,28 +112,42 @@ class _CheckInAndOutButtonState extends State<CheckInAndOutButton> {
     bool isWithinBoundaries,
     bool isCheckIn,
   ) async {
-    if (isCheckIn) {
-      if (!isWithinBoundaries) {
-        showDialog(
-          context: context,
-          builder: (context) => OutOfBoundariesDialog(),
+    if (!isCheckIn) {
+      if (DateTime.now().toLocal().isBefore(
+            DateTime(
+              DateTime.now().year,
+              DateTime.now().month,
+              DateTime.now().day,
+              9,
+              0,
+            ).toLocal(),
+          )) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('You can only check in after 9:00 AM')),
         );
       } else {
-        if (DateTime.now().toLocal().isAfter(
-              DateTime(
-                DateTime.now().year,
-                DateTime.now().month,
-                DateTime.now().day,
-                9,
-                0,
-              ).toLocal(),
-            )) {
-          await showDialog(
+        if (!isWithinBoundaries) {
+          showDialog(
             context: context,
-            builder: (context) => LateCheckInDialog(),
+            builder: (context) => OutOfBoundariesDialog(),
           );
         } else {
-          await context.read<HomeCubit>().checkInUser();
+          if (DateTime.now().toLocal().isAfter(
+                DateTime(
+                  DateTime.now().year,
+                  DateTime.now().month,
+                  DateTime.now().day,
+                  9,
+                  30,
+                ).toLocal(),
+              )) {
+            await showDialog(
+              context: context,
+              builder: (context) => LateCheckInDialog(),
+            );
+          } else {
+            await context.read<HomeCubit>().checkInUser();
+          }
         }
       }
     } else {

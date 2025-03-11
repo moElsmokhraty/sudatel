@@ -87,12 +87,20 @@ class CheckInAndOutContainer extends StatelessWidget {
                     color: statusColor,
                   ),
                 ),
-                Text(
-                  status,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w400,
-                    color: statusColor,
+                SizedBox(
+                  width: 75.w,
+                  child: Text(
+                    status,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: status == 'Early Check Out' ||
+                              status == 'Late Check In'
+                          ? 10.sp
+                          : 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: statusColor,
+                    ),
                   ),
                 ),
               ],

@@ -63,34 +63,72 @@ class HomeMapState extends State<HomeMap> with AutomaticKeepAliveClientMixin {
     return SizedBox(
       height: 180.h,
       width: 1.sw,
-      child: _currentPosition == null
-          ? Center(
-              child: SpinKitCircle(
-                color: AppColors.darkRed,
-                size: 50.0,
-              ),
-            )
-          : ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
-              child: GoogleMap(
-                scrollGesturesEnabled: false,
-                zoomGesturesEnabled: false,
-                zoomControlsEnabled: false,
-                initialCameraPosition: CameraPosition(
-                  target: _currentPosition!,
-                  zoom: 15,
-                ),
-                markers: {
-                  Marker(
-                    markerId: MarkerId("current"),
-                    position: _currentPosition!,
+      child: Builder(
+        builder: (context) {
+          if (_permission == LocationPermission.deniedForever ||
+              _permission == LocationPermission.denied) {
+            return GestureDetector(
+              onTap: () async {
+                await _checkPermission();
+              },
+              child: Center(
+                child: Text(
+                  'Location permission denied, tap to retry',
+                  style: TextStyle(
+                    color: AppColors.darkRed,
+                    fontSize: 16.sp,
                   ),
-                },
-                onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
-                },
+                ),
               ),
-            ),
+            );
+          } else if (!isLocationServiceEnabled) {
+            return GestureDetector(
+              onTap: () async {
+                await _checkPermission();
+              },
+              child: Center(
+                child: Text(
+                  'Location service disabled, tap to retry',
+                  style: TextStyle(
+                    color: AppColors.darkRed,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return _currentPosition == null
+                ? Center(
+                    child: SpinKitCircle(
+                      color: AppColors.darkRed,
+                      size: 50.0,
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: GoogleMap(
+                      scrollGesturesEnabled: false,
+                      zoomGesturesEnabled: false,
+                      zoomControlsEnabled: false,
+                      mapToolbarEnabled: false,
+                      initialCameraPosition: CameraPosition(
+                        target: _currentPosition!,
+                        zoom: 15,
+                      ),
+                      markers: {
+                        Marker(
+                          markerId: MarkerId("current"),
+                          position: _currentPosition!,
+                        ),
+                      },
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller = controller;
+                      },
+                    ),
+                  );
+          }
+        },
+      ),
     );
   }
 }

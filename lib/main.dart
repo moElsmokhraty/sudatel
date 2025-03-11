@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sudatel/features/home/data/repos/home_repo/home_repo.dart';
+import 'package:sudatel/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'core/di/service_locator.dart';
 import 'core/routing/app_routes.dart';
 import 'core/utils/bloc_observer.dart';
@@ -40,13 +42,16 @@ class Sudatel extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       ensureScreenSize: true,
-      child: MaterialApp(
-        title: 'Sudatel',
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: FirebaseAuth.instance.currentUser != null
-            ? AppRoutes.home
-            : AppRoutes.splash,
+      child: BlocProvider<HomeCubit>(
+        create: (_) => HomeCubit(getIt.get<HomeRepo>()),
+        child: MaterialApp(
+          title: 'Sudatel',
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          initialRoute: FirebaseAuth.instance.currentUser != null
+              ? AppRoutes.home
+              : AppRoutes.splash,
+        ),
       ),
     );
   }

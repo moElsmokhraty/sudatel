@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sudatel/core/di/service_locator.dart';
 import '../../features/auth/data/repos/auth_repo/auth_repo.dart';
 import '../../features/auth/presentation/cubits/login_cubit/login_cubit.dart';
-import '../../features/home/data/repos/home_repo/home_repo.dart';
-import '../../features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view/home_view.dart';
 import '/core/routing/app_routes.dart';
 import '../../features/auth/presentation/views/login_view/login_view.dart';
@@ -24,12 +22,7 @@ class AppRouter {
           child: const LoginView(),
         ));
       case AppRoutes.home:
-        return transitionPage(BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit(getIt.get<HomeRepo>())
-            ..getCheckInAndOutTimes()
-            ..didUserCheckInToday(),
-          child: const HomeView(),
-        ));
+        return transitionPage(const HomeView());
 
       default:
         return MaterialPageRoute(
