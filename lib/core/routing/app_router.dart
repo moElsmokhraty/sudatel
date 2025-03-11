@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sudatel/core/di/service_locator.dart';
-import '../../features/home/data/repos/auth_repo/auth_repo.dart';
+import '../../features/auth/data/repos/auth_repo/auth_repo.dart';
 import '../../features/home/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../features/home/presentation/views/home_view/home_view.dart';
 import '/core/routing/app_routes.dart';
