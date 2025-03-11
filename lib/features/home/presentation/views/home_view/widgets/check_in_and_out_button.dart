@@ -101,8 +101,8 @@ class _CheckInAndOutButtonState extends State<CheckInAndOutButton> {
               DateTime.now().year,
               DateTime.now().month,
               DateTime.now().day,
-              17,
-              0,
+              16,
+              30,
             ).toLocal(),
           )) {
         await showDialog(

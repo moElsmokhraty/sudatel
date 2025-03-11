@@ -69,3 +69,26 @@ final class CheckOutUserSuccess extends HomeState {
   @override
   List<Object> get props => [];
 }
+
+final class GetCheckInAndOutTimesLoading extends HomeState {
+  @override
+  List<Object> get props => [];
+}
+
+final class GetCheckInAndOutTimesError extends HomeState {
+  final String errorMessage;
+
+  const GetCheckInAndOutTimesError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+final class GetCheckInAndOutTimesSuccess extends HomeState {
+  final CheckInAndOutTimesModel checkInAndOutTimes;
+
+  const GetCheckInAndOutTimesSuccess(this.checkInAndOutTimes);
+
+  @override
+  List<Object> get props => [checkInAndOutTimes];
+}

@@ -25,7 +25,9 @@ class AppRouter {
         ));
       case AppRoutes.home:
         return transitionPage(BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit(getIt.get<HomeRepo>())..didUserCheckInToday(),
+          create: (context) => HomeCubit(getIt.get<HomeRepo>())
+            ..getCheckInAndOutTimes()
+            ..didUserCheckInToday(),
           child: const HomeView(),
         ));
 
