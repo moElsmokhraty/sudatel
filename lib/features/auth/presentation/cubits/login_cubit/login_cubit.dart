@@ -15,7 +15,15 @@ class LoginCubit extends Cubit<LoginState> {
     final result = await _authRepo.login();
     result.fold(
       (failure) => emit(LoginFailure(failure.errMessage)),
-      (user) => emit(LoginSuccess(user)),
+      (user) => saveUserToFirestore(user!),
+    );
+  }
+
+  Future<void> saveUserToFirestore(User user) async {
+    final result = await _authRepo.saveUserToFirestore(user);
+    result.fold(
+      (failure) => emit(LoginFailure(failure.errMessage)),
+      (_) => emit(LoginSuccess(user)),
     );
   }
 }

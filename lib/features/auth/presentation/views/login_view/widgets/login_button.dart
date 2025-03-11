@@ -4,7 +4,7 @@ import '../../../../../../core/widgets/spinkit.dart';
 import '../../../../../../core/routing/app_routes.dart';
 import 'package:sudatel/core/routing/navigation_extension.dart';
 import '../../../../../../core/widgets/buttons/gradient_button.dart';
-import '../../../../../home/presentation/cubits/login_cubit/login_cubit.dart';
+import '../../../../../auth/presentation/cubits/login_cubit/login_cubit.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});

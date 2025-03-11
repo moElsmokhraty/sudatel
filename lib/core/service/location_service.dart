@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 class LocationService {
   Future<Position> getCurrentLocation() async {
     return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.best,
+      locationSettings: LocationSettings(accuracy: LocationAccuracy.best),
     );
   }
 
@@ -26,14 +26,12 @@ class LocationService {
   bool isWithinAllowedDistance(
     double userLat,
     double userLng,
-    double workLat,
-    double workLng,
   ) {
     double distanceInMeters = Geolocator.distanceBetween(
       userLat,
       userLng,
-      workLat,
-      workLng,
+      29.97266577911208,
+      31.236150596112875,
     );
 
     return distanceInMeters <= 100;

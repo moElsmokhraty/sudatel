@@ -5,5 +5,7 @@ import '../../../../../core/errors/failure.dart';
 abstract class AuthRepo {
   Future<Either<Failure, User?>> login();
 
+  Future<Either<Failure, void>> saveUserToFirestore(User user);
+
   Future<Either<Failure, void>> logout();
 }

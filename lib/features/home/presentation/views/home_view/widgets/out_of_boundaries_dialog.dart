@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sudatel/core/routing/navigation_extension.dart';
 import '../../../../../../core/styles/app_colors.dart';
 import '../../../../../../core/helpers/spacing_helper.dart';
 import '../../../../../../core/widgets/buttons/custom_button.dart';
@@ -109,11 +110,13 @@ class OutOfBoundariesDialog extends StatelessWidget {
             const VerticalSpace(16),
             GradientButton(
               onPressed: () {},
-              text: 'Confirm Checkout',
+              text: 'Confirm Check In',
             ),
             const VerticalSpace(4),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pop();
+              },
               text: 'Cancel',
               color: Colors.white,
               textStyle: TextStyle(

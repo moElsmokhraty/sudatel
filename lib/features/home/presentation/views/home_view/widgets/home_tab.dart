@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'early_check_out_dialog.dart';
 import 'home_map.dart';
-import 'out_of_boundaries_dialog.dart';
 import 'user_info.dart';
 import 'balance_container.dart';
+import 'check_in_and_out_button.dart';
 import 'check_in_and_out_container.dart';
 import '../../../../../../core/styles/app_colors.dart';
 import '../../../../../../core/helpers/spacing_helper.dart';
-import '../../../../../../core/widgets/buttons/custom_button.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -55,20 +53,7 @@ class HomeTab extends StatelessWidget {
                 const VerticalSpace(16),
                 const HomeMap(),
                 const VerticalSpace(16),
-                CustomButton(
-                  text: 'Check Out',
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => OutOfBoundariesDialog(),
-                    );
-                  },
-                  color: Colors.white,
-                  borderSide: BorderSide(
-                    color: AppColors.darkRed,
-                    width: 1.8,
-                  ),
-                ),
+                const CheckInAndOutButton(),
               ],
             ),
           ),
